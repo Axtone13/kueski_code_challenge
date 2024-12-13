@@ -24,7 +24,7 @@ class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
               "Content-Type": "application/json",
               "Authorization": "Bearer ${Env.bearerToken}",
             }));
-
-    return response.data['results'];
+    final List<dynamic> results = response.data['results'];
+    return results.map((movie) => MovieModel.fromJson(movie)).toList();
   }
 }
