@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kueski_code_challenge/features/movies/presentation/blocs/language/language_bloc.dart';
+import 'package:kueski_code_challenge/features/movies/presentation/blocs/language/language_event.dart';
 import 'package:kueski_code_challenge/features/movies/presentation/blocs/movie_bloc.dart';
 import 'package:kueski_code_challenge/features/movies/presentation/blocs/movie_state.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'movie_detail_page.dart';
 
 class MovieListPage extends StatelessWidget {
@@ -9,8 +12,29 @@ class MovieListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Movies')),
+      appBar: AppBar(
+        title: Text(localizations.movieListTitle),
+        actions: [
+          PopupMenuButton<Locale>(
+            onSelected: (locale) {
+              context.read<LanguageBloc>().add(ChangeLanguage(locale));
+            },
+            itemBuilder: (context) => [
+              const PopupMenuItem(
+                value: Locale('en'),
+                child: Text('English'),
+              ),
+              const PopupMenuItem(
+                value: Locale('es'),
+                child: Text('Español'),
+              ),
+            ],
+          ),
+        ],
+      ),
       body: BlocBuilder<MovieBloc, MovieState>(
         builder: (context, state) {
           if (state is MovieLoading) {
