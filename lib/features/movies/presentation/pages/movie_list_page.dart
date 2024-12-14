@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kueski_code_challenge/features/movies/presentation/bloc/movie_bloc.dart';
-import 'package:kueski_code_challenge/features/movies/presentation/bloc/movie_state.dart';
+import 'package:kueski_code_challenge/features/movies/presentation/blocs/movie_bloc.dart';
+import 'package:kueski_code_challenge/features/movies/presentation/blocs/movie_state.dart';
 import 'movie_detail_page.dart';
 
 class MovieListPage extends StatelessWidget {

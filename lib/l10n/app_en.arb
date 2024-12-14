@@ -1,0 +1,9 @@
+{
+  "@@locale": "en",
+  "appTitle": "Movies",
+  "movieListTitle": "Movie List",
+  "movieDetailTitle": "Movie Details",
+  "releaseDate": "Release Date",
+  "genres": "Genres",
+  "overview": "Overview"
+}

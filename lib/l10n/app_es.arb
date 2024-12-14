@@ -1,0 +1,9 @@
+{
+  "@@locale": "es",
+  "appTitle": "Películas",
+  "movieListTitle": "Lista de Películas",
+  "movieDetailTitle": "Detalles de la Película",
+  "releaseDate": "Fecha de lanzamiento",
+  "genres": "Géneros",
+  "overview": "Sinopsis"
+}
