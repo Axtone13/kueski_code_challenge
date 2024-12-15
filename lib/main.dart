@@ -35,7 +35,7 @@ class MoviesApp extends StatelessWidget {
       providers: [
         BlocProvider<MovieBloc>(
           create: (_) => MovieBloc(getMovies)
-            ..add(LoadMovies(lang: currentLanguageCode ?? 'en-US', page: 1)),
+            ..add(LoadMovies(lang: currentLanguageCode ?? 'es-MX', page: 1)),
         ),
         BlocProvider<LanguageBloc>(
           create: (_) => LanguageBloc(),

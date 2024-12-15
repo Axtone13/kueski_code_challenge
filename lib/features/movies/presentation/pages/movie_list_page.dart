@@ -8,8 +8,39 @@ import 'package:kueski_code_challenge/features/movies/presentation/blocs/movie_s
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'movie_detail_page.dart';
 
-class MovieListPage extends StatelessWidget {
+class MovieListPage extends StatefulWidget {
   const MovieListPage({super.key});
+
+  @override
+  State<MovieListPage> createState() => _MovieListPageState();
+}
+
+class _MovieListPageState extends State<MovieListPage> {
+  final ScrollController _scrollController = ScrollController();
+  int _currentPage = 1;
+  String _currentLanguage = 'es-MX';
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.pixels ==
+        _scrollController.position.maxScrollExtent) {
+      _currentPage++;
+      context
+          .read<MovieBloc>()
+          .add(LoadMovies(lang: _currentLanguage, page: _currentPage));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +53,12 @@ class MovieListPage extends StatelessWidget {
           PopupMenuButton<Locale>(
             icon: const Icon(Icons.language),
             onSelected: (locale) {
+              _currentLanguage = locale.languageCode;
+              _currentPage = 1;
               context.read<LanguageBloc>().add(ChangeLanguage(locale));
               context
                   .read<MovieBloc>()
-                  .add(LoadMovies(lang: locale.languageCode, page: 1));
+                  .add(LoadMovies(lang: _currentLanguage, page: _currentPage));
             },
             itemBuilder: (context) => [
               const PopupMenuItem(
@@ -46,6 +79,7 @@ class MovieListPage extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
           } else if (state is MovieListLoaded) {
             return ListView.builder(
+              controller: _scrollController,
               itemCount: state.movies.length,
               itemBuilder: (context, index) {
                 final movie = state.movies[index];

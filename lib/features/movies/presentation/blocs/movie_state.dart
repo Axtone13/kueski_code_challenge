@@ -5,7 +5,9 @@ abstract class MovieState {}
 
 class MovieInitial extends MovieState {}
 
-class MovieLoading extends MovieState {}
+class MovieLoading extends MovieState {
+  MovieLoading(List<Movie> oldMovies);
+}
 
 class MovieListLoaded extends MovieState {
   final List<Movie> movies;
