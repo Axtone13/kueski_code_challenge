@@ -6,5 +6,5 @@
   "releaseDate": "Fecha de lanzamiento",
   "genres": "Géneros",
   "overview": "Sinopsis",
-  "codeLanguage": "es-MX"
+  "languageCode": "es-MX"
 }

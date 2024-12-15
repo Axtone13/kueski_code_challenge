@@ -29,7 +29,7 @@ class MoviesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentLanguageCode = AppLocalizations.of(context)?.codeLanguage;
+    final currentLanguageCode = AppLocalizations.of(context)?.languageCode;
 
     return MultiBlocProvider(
       providers: [

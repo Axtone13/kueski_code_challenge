@@ -6,5 +6,5 @@
   "releaseDate": "Release Date",
   "genres": "Genres",
   "overview": "Overview",
-  "codeLanguage": "en-EU" 
+  "languageCode": "en-EU" 
 }

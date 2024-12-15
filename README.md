@@ -7,7 +7,7 @@ A Flutter project to explore popular movies using the TMDB API.
 MovieExplorer is a Flutter application that allows users to explore popular movies. The application includes the following features:
 
 - List of popular movies.
-- Movie details including synopsis, rating, and more.
+- Movie details including synopsis, release date, and more.
 - Multi-language support (English and Spanish).
 - Infinite scrolling to load more movies as the user scrolls down.
 
@@ -61,6 +61,3 @@ If you are using Visual Studio Code, you can use the provided launch.json config
 
 #### Contributing
 Contributions are welcome. Please open an issue or a pull request to discuss any changes you would like to make.
-
-#### License
-This project is licensed under the MIT License. See the LICENSE file for more details.

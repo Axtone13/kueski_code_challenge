@@ -20,15 +20,4 @@ class MovieModel extends Movie {
       releaseDate: json['release_date'],
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'title': title,
-      'overview': overview,
-      'poster_path': posterPath,
-      'genre_ids': genreIds,
-      'release_date': releaseDate,
-    };
-  }
 }

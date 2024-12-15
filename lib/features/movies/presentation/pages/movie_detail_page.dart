@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../domain/entities/movie.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:movies_app_challenge/features/movies/domain/entities/movie.dart';
 
 class MovieDetailPage extends StatelessWidget {
   final Movie movie;
@@ -8,6 +9,8 @@ class MovieDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(title: Text(movie.title)),
       body: Padding(
@@ -29,9 +32,9 @@ class MovieDetailPage extends StatelessWidget {
                     const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
-              Text('Release Date: ${movie.releaseDate}'),
+              Text('${localizations.releaseDate}: ${movie.releaseDate}'),
               const SizedBox(height: 8),
-              Text('Genres: ${movie.genreIds.join(', ')}'),
+              Text('${localizations.genres}: ${movie.genreIds.join(', ')}'),
               const SizedBox(height: 16),
               Text(
                 movie.overview,
