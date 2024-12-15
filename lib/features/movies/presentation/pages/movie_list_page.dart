@@ -6,7 +6,7 @@ import 'package:movies_app_challenge/features/movies/presentation/blocs/movie_bl
 import 'package:movies_app_challenge/features/movies/presentation/blocs/movie_event.dart';
 import 'package:movies_app_challenge/features/movies/presentation/blocs/movie_state.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'movie_detail_page.dart';
+import 'package:movies_app_challenge/features/movies/presentation/widgets/movie_list.dart';
 
 class MovieListPage extends StatefulWidget {
   const MovieListPage({super.key});
@@ -18,7 +18,8 @@ class MovieListPage extends StatefulWidget {
 class _MovieListPageState extends State<MovieListPage> {
   final ScrollController _scrollController = ScrollController();
   int _currentPage = 1;
-  String _currentLanguage = 'es-MX';
+  String _currentLanguageCode = 'en-US';
+  String _currentLocaleCode = 'en';
 
   @override
   void initState() {
@@ -38,7 +39,7 @@ class _MovieListPageState extends State<MovieListPage> {
       _currentPage++;
       context
           .read<MovieBloc>()
-          .add(LoadMovies(lang: _currentLanguage, page: _currentPage));
+          .add(LoadMovies(lang: _currentLanguageCode, page: _currentPage));
     }
   }
 
@@ -53,20 +54,26 @@ class _MovieListPageState extends State<MovieListPage> {
           PopupMenuButton<Locale>(
             icon: const Icon(Icons.language),
             onSelected: (locale) {
-              _currentLanguage = locale.languageCode;
+              final languageCode =
+                  locale.languageCode == 'en' ? 'en-US' : 'es-MX';
+              final localeCode = locale.languageCode == 'en' ? 'en' : 'es';
+              _currentLanguageCode = languageCode;
+              _currentLocaleCode = localeCode;
               _currentPage = 1;
               context.read<LanguageBloc>().add(ChangeLanguage(locale));
-              context
-                  .read<MovieBloc>()
-                  .add(LoadMovies(lang: _currentLanguage, page: _currentPage));
+              // context
+              //     .read<MovieBloc>()
+              //     .add(LoadGenres(lang: _currentLocaleCode));
+              context.read<MovieBloc>().add(
+                  LoadMovies(lang: _currentLanguageCode, page: _currentPage));
             },
             itemBuilder: (context) => [
               const PopupMenuItem(
-                value: Locale('en'),
+                value: Locale('en', 'US'),
                 child: Text('🇺🇸 English'),
               ),
               const PopupMenuItem(
-                value: Locale('es'),
+                value: Locale('es', 'MX'),
                 child: Text('🇲🇽 Español'),
               ),
             ],
@@ -78,27 +85,9 @@ class _MovieListPageState extends State<MovieListPage> {
           if (state is MovieLoading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is MovieListLoaded) {
-            return ListView.builder(
-              controller: _scrollController,
-              itemCount: state.movies.length,
-              itemBuilder: (context, index) {
-                final movie = state.movies[index];
-                return ListTile(
-                  leading: Image.network(
-                    'https://image.tmdb.org/t/p/w500${movie.posterPath}',
-                    fit: BoxFit.cover,
-                  ),
-                  title: Text(movie.title),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => MovieDetailPage(movie: movie),
-                      ),
-                    );
-                  },
-                );
-              },
+            return MovieList(
+              movies: state.movies,
+              scrollController: _scrollController,
             );
           } else if (state is MovieError) {
             return Center(child: Text(state.message));

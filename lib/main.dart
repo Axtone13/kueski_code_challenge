@@ -18,24 +18,26 @@ void main() {
   final movieRepository =
       MovieRepositoryImpl(moviesRemoteDataSource: moviesRemoteDataSource);
   final getMovies = GetPopularMoviesUseCase(repository: movieRepository);
+  final getGenres = GetGenresUseCase(repository: movieRepository);
 
-  runApp(MoviesApp(getMovies: getMovies));
+  runApp(MoviesApp(getMovies: getMovies, getGenres: getGenres));
 }
 
 class MoviesApp extends StatelessWidget {
   final GetPopularMoviesUseCase getMovies;
+  final GetGenresUseCase getGenres;
 
-  const MoviesApp({super.key, required this.getMovies});
+  const MoviesApp(
+      {super.key, required this.getMovies, required this.getGenres});
 
   @override
   Widget build(BuildContext context) {
-    final currentLanguageCode = AppLocalizations.of(context)?.languageCode;
-
     return MultiBlocProvider(
       providers: [
         BlocProvider<MovieBloc>(
-          create: (_) => MovieBloc(getMovies)
-            ..add(LoadMovies(lang: currentLanguageCode ?? 'es-MX', page: 1)),
+          create: (_) => MovieBloc(getMovies, getGenres)
+            ..add(LoadGenres(lang: 'en'))
+            ..add(LoadMovies(lang: 'en-US', page: 1)),
         ),
         BlocProvider<LanguageBloc>(
           create: (_) => LanguageBloc(),

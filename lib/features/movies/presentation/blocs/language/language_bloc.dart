@@ -4,7 +4,7 @@ import 'package:movies_app_challenge/features/movies/presentation/blocs/language
 import 'package:movies_app_challenge/features/movies/presentation/blocs/language/language_state.dart';
 
 class LanguageBloc extends Bloc<LanguageEvent, LanguageState> {
-  LanguageBloc() : super(LanguageState(const Locale('es'))) {
+  LanguageBloc() : super(LanguageState(const Locale('en', 'US'))) {
     on<ChangeLanguage>((event, emit) {
       emit(LanguageState(event.locale));
     });

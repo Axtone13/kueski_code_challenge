@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:movies_app_challenge/features/movies/data/models/genre_model.dart';
 import 'package:movies_app_challenge/features/movies/domain/entities/movie.dart';
+import 'package:movies_app_challenge/features/movies/presentation/blocs/movie_bloc.dart';
+import 'package:movies_app_challenge/features/movies/presentation/blocs/movie_state.dart';
+import 'package:movies_app_challenge/features/movies/presentation/widgets/poster.dart';
 
 class MovieDetailPage extends StatelessWidget {
   final Movie movie;
@@ -19,12 +24,7 @@ class MovieDetailPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
-                child: Image.network(
-                  'https://image.tmdb.org/t/p/w500${movie.posterPath}',
-                  fit: BoxFit.cover,
-                ),
-              ),
+              Poster(movie: movie),
               const SizedBox(height: 16),
               Text(
                 movie.title,
