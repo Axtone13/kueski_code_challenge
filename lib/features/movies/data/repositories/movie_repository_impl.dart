@@ -10,10 +10,10 @@ class MovieRepositoryImpl implements MoviesRepository {
   MovieRepositoryImpl({required this.moviesRemoteDataSource});
 
   @override
-  Future<List<Movie>> getPopularMovies() async {
+  Future<List<Movie>> getPopularMovies(String lang, int page) async {
     try {
       final List<Movie> response =
-          await moviesRemoteDataSource.getPopularMovies();
+          await moviesRemoteDataSource.getPopularMovies(lang, page);
       return response;
     } on DioException {
       throw ServerFailure();

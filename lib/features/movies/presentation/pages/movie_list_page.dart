@@ -19,17 +19,18 @@ class MovieListPage extends StatelessWidget {
         title: Text(localizations.movieListTitle),
         actions: [
           PopupMenuButton<Locale>(
+            icon: const Icon(Icons.language),
             onSelected: (locale) {
               context.read<LanguageBloc>().add(ChangeLanguage(locale));
             },
             itemBuilder: (context) => [
               const PopupMenuItem(
                 value: Locale('en'),
-                child: Text('English'),
+                child: Text('🇺🇸 English'),
               ),
               const PopupMenuItem(
                 value: Locale('es'),
-                child: Text('Español'),
+                child: Text('🇲🇽 Español'),
               ),
             ],
           ),

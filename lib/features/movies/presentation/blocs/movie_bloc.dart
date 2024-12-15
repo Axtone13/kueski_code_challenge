@@ -12,7 +12,7 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
     on<LoadMovies>((event, emit) async {
       emit(MovieLoading());
       try {
-        final movies = await getMovies.call();
+        final movies = await getMovies.call(event.lang, event.page);
         emit(MovieListLoaded(movies));
       } catch (e) {
         debugPrint(e.toString());

@@ -3,21 +3,21 @@ import 'package:kueski_code_challenge/features/movies/data/models/movie_model.da
 import 'package:dio/dio.dart';
 
 abstract class MoviesRemoteDataSource {
-  Future<List<MovieModel>> getPopularMovies();
+  Future<List<MovieModel>> getPopularMovies(String lang, int page);
 }
 
 class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
   final Dio dio = Dio();
 
   @override
-  Future<List<MovieModel>> getPopularMovies() async {
+  Future<List<MovieModel>> getPopularMovies(String lang, int page) async {
     final response =
         await dio.get('https://api.themoviedb.org/3/discover/movie',
             queryParameters: {
               'include_adult': false,
               'include_video': false,
-              'language': 'es-MX',
-              'page': 1,
+              'language': lang,
+              'page': page,
               'sort_by': 'popularity.desc'
             },
             options: Options(headers: {
