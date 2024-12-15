@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kueski_code_challenge/features/movies/presentation/blocs/language/language_bloc.dart';
-import 'package:kueski_code_challenge/features/movies/presentation/blocs/language/language_event.dart';
-import 'package:kueski_code_challenge/features/movies/presentation/blocs/movie_bloc.dart';
-import 'package:kueski_code_challenge/features/movies/presentation/blocs/movie_event.dart';
-import 'package:kueski_code_challenge/features/movies/presentation/blocs/movie_state.dart';
+import 'package:movies_app_challenge/features/movies/presentation/blocs/language/language_bloc.dart';
+import 'package:movies_app_challenge/features/movies/presentation/blocs/language/language_event.dart';
+import 'package:movies_app_challenge/features/movies/presentation/blocs/movie_bloc.dart';
+import 'package:movies_app_challenge/features/movies/presentation/blocs/movie_event.dart';
+import 'package:movies_app_challenge/features/movies/presentation/blocs/movie_state.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'movie_detail_page.dart';
 

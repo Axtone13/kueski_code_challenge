@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:kueski_code_challenge/features/movies/data/datasource/movies_remote_data_source.dart';
-import 'package:kueski_code_challenge/features/movies/domain/use_cases/get_popular_movies.dart';
-import 'package:kueski_code_challenge/features/movies/presentation/blocs/language/language_bloc.dart';
-import 'package:kueski_code_challenge/features/movies/presentation/blocs/language/language_state.dart';
-import 'package:kueski_code_challenge/features/movies/presentation/blocs/movie_event.dart';
+import 'package:movies_app_challenge/features/movies/data/datasource/movies_remote_data_source.dart';
+import 'package:movies_app_challenge/features/movies/domain/use_cases/get_popular_movies.dart';
+import 'package:movies_app_challenge/features/movies/presentation/blocs/language/language_bloc.dart';
+import 'package:movies_app_challenge/features/movies/presentation/blocs/language/language_state.dart';
+import 'package:movies_app_challenge/features/movies/presentation/blocs/movie_event.dart';
 import 'features/movies/presentation/pages/movie_list_page.dart';
 import 'features/movies/presentation/blocs/movie_bloc.dart';
 import 'features/movies/data/repositories/movie_repository_impl.dart';
@@ -45,7 +45,7 @@ class MoviesApp extends StatelessWidget {
         builder: (context, state) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'Kueski Code Challenge',
+            title: 'Movies App Challenge',
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),

@@ -1,5 +1,5 @@
-import 'package:kueski_code_challenge/core/utils/env_var.dart';
-import 'package:kueski_code_challenge/features/movies/data/models/movie_model.dart';
+import 'package:movies_app_challenge/core/utils/env_var.dart';
+import 'package:movies_app_challenge/features/movies/data/models/movie_model.dart';
 import 'package:dio/dio.dart';
 
 abstract class MoviesRemoteDataSource {

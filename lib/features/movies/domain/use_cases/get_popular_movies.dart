@@ -1,5 +1,5 @@
-import 'package:kueski_code_challenge/features/movies/domain/entities/movie.dart';
-import 'package:kueski_code_challenge/features/movies/domain/repositories/movies_repository.dart';
+import 'package:movies_app_challenge/features/movies/domain/entities/movie.dart';
+import 'package:movies_app_challenge/features/movies/domain/repositories/movies_repository.dart';
 
 class GetPopularMoviesUseCase {
   final MoviesRepository repository;

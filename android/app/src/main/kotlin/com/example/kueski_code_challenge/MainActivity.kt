@@ -1,4 +1,4 @@
-package com.example.kueski_code_challenge
+package com.example.movies_app_challenge
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,5 +1,4 @@
-
-import 'package:kueski_code_challenge/features/movies/domain/entities/movie.dart';
+import 'package:movies_app_challenge/features/movies/domain/entities/movie.dart';
 
 abstract class MovieState {}
 
