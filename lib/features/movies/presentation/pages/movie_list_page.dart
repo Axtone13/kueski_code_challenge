@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app_challenge/features/movies/presentation/blocs/genres/genres_bloc.dart';
+import 'package:movies_app_challenge/features/movies/presentation/blocs/genres/genres_event.dart';
 import 'package:movies_app_challenge/features/movies/presentation/blocs/language/language_bloc.dart';
 import 'package:movies_app_challenge/features/movies/presentation/blocs/language/language_event.dart';
-import 'package:movies_app_challenge/features/movies/presentation/blocs/movie_bloc.dart';
-import 'package:movies_app_challenge/features/movies/presentation/blocs/movie_event.dart';
-import 'package:movies_app_challenge/features/movies/presentation/blocs/movie_state.dart';
+import 'package:movies_app_challenge/features/movies/presentation/blocs/movies/movie_bloc.dart';
+import 'package:movies_app_challenge/features/movies/presentation/blocs/movies/movie_event.dart';
+import 'package:movies_app_challenge/features/movies/presentation/blocs/movies/movie_state.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:movies_app_challenge/features/movies/presentation/widgets/movie_list.dart';
 
@@ -61,9 +63,9 @@ class _MovieListPageState extends State<MovieListPage> {
               _currentLocaleCode = localeCode;
               _currentPage = 1;
               context.read<LanguageBloc>().add(ChangeLanguage(locale));
-              // context
-              //     .read<MovieBloc>()
-              //     .add(LoadGenres(lang: _currentLocaleCode));
+              context
+                  .read<GenresBloc>()
+                  .add(LoadGenres(lang: _currentLocaleCode));
               context.read<MovieBloc>().add(
                   LoadMovies(lang: _currentLanguageCode, page: _currentPage));
             },

@@ -8,9 +8,8 @@ import 'movie_state.dart';
 
 class MovieBloc extends Bloc<MovieEvent, MovieState> {
   final GetPopularMoviesUseCase getMovies;
-  final GetGenresUseCase getGenres;
 
-  MovieBloc(this.getMovies, this.getGenres) : super(MovieInitial()) {
+  MovieBloc(this.getMovies) : super(MovieInitial()) {
     on<LoadMovies>((event, emit) async {
       if (state is MovieLoading) return;
       final currentState = state;
@@ -27,17 +26,6 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
       } catch (e) {
         debugPrint(e.toString());
         emit(MovieError('Failed to load movies'));
-      }
-    });
-
-    on<LoadGenres>((event, emit) async {
-      emit(GenreLoading());
-      try {
-        final genres = await getGenres.call(event.lang);
-        emit(GenreListLoaded(genres));
-      }  catch (e) {
-        debugPrint(e.toString());
-        emit(MovieError('Failed to load genres'));
       }
     });
   }

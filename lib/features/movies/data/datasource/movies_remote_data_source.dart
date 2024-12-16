@@ -1,11 +1,9 @@
 import 'package:movies_app_challenge/core/utils/env_var.dart';
-import 'package:movies_app_challenge/features/movies/data/models/genre_model.dart';
 import 'package:movies_app_challenge/features/movies/data/models/movie_model.dart';
 import 'package:dio/dio.dart';
 
 abstract class MoviesRemoteDataSource {
   Future<List<MovieModel>> getPopularMovies(String lang, int page);
-  Future<List<GenreModel>> getMovieGenres(String lang);
 }
 
 class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
@@ -28,19 +26,5 @@ class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
             }));
     final List<dynamic> results = response.data['results'];
     return results.map((movie) => MovieModel.fromJson(movie)).toList();
-  }
-  
-  @override
-  Future<List<GenreModel>> getMovieGenres(String lang) async {
-    final response = await dio.get('https://api.themoviedb.org/3/genre/movie/list',
-        queryParameters: {
-          'language': lang,
-        },
-        options: Options(headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer ${Env.bearerToken}",
-        }));
-    final List<dynamic> genres = response.data['genres'];
-    return genres.map((genre) => GenreModel.fromJson(genre)).toList();
   }
 }

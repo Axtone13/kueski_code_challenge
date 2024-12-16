@@ -6,9 +6,3 @@ class LoadMovies extends MovieEvent {
 
   LoadMovies({required this.lang, required this.page});
 }
-
-class LoadGenres extends MovieEvent {
-  final String lang;
-
-  LoadGenres({required this.lang});
-}

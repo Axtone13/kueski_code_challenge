@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:movies_app_challenge/features/movies/domain/entities/movie.dart';
+import 'package:movies_app_challenge/features/movies/presentation/blocs/genres/genres_bloc.dart';
+import 'package:movies_app_challenge/features/movies/presentation/blocs/genres/genres_state.dart';
 import 'package:movies_app_challenge/features/movies/presentation/widgets/movie_details.dart';
 import 'package:movies_app_challenge/features/movies/presentation/widgets/poster.dart';
 
@@ -45,9 +48,21 @@ class MovieDetailPage extends StatelessWidget {
                       data: movie.releaseDate,
                     ),
                     const SizedBox(height: 8),
-                    MovieDetails(
-                      title: localizations.genres,
-                      data: movie.genreIds.join(', '),
+                    BlocBuilder<GenresBloc, GenresState>(
+                      builder: (context, state) {
+                        if (state is GenreListLoaded) {
+                          final genres = state.genres
+                              .where(
+                                  (genre) => movie.genreIds.contains(genre.id))
+                              .map((genre) => genre.name)
+                              .join(', ');
+                          return MovieDetails(
+                            title: localizations.genres,
+                            data: genres,
+                          );
+                        }
+                        return const CircularProgressIndicator();
+                      },
                     ),
                   ],
                 ),

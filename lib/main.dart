@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:movies_app_challenge/features/movies/data/datasource/genres_remote_data_source.dart';
 import 'package:movies_app_challenge/features/movies/data/datasource/movies_remote_data_source.dart';
+import 'package:movies_app_challenge/features/movies/data/repositories/genre_repository_impl.dart';
+import 'package:movies_app_challenge/features/movies/domain/use_cases/get_movie_genres.dart';
 import 'package:movies_app_challenge/features/movies/domain/use_cases/get_popular_movies.dart';
+import 'package:movies_app_challenge/features/movies/presentation/blocs/genres/genres_bloc.dart';
+import 'package:movies_app_challenge/features/movies/presentation/blocs/genres/genres_event.dart';
 import 'package:movies_app_challenge/features/movies/presentation/blocs/language/language_bloc.dart';
 import 'package:movies_app_challenge/features/movies/presentation/blocs/language/language_state.dart';
-import 'package:movies_app_challenge/features/movies/presentation/blocs/movie_event.dart';
+import 'package:movies_app_challenge/features/movies/presentation/blocs/movies/movie_event.dart';
 import 'features/movies/presentation/pages/movie_list_page.dart';
-import 'features/movies/presentation/blocs/movie_bloc.dart';
+import 'features/movies/presentation/blocs/movies/movie_bloc.dart';
 import 'features/movies/data/repositories/movie_repository_impl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // import 'package:dio/dio.dart';
@@ -15,10 +20,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 void main() {
   // final dio = Dio();
   final moviesRemoteDataSource = MoviesRemoteDataSourceImpl();
-  final movieRepository =
-      MovieRepositoryImpl(moviesRemoteDataSource: moviesRemoteDataSource);
+  final movieRepository = MovieRepositoryImpl(moviesRemoteDataSource: moviesRemoteDataSource);
   final getMovies = GetPopularMoviesUseCase(repository: movieRepository);
-  final getGenres = GetGenresUseCase(repository: movieRepository);
+
+  final genresRemoteDataSource = GenresRemoteDataSourceImpl();
+  final genreRepository = GenreRepositoryImpl(genresRemoteDataSource: genresRemoteDataSource);
+  final getGenres = GetGenresUseCase(repository: genreRepository);
 
   runApp(MoviesApp(getMovies: getMovies, getGenres: getGenres));
 }
@@ -34,9 +41,12 @@ class MoviesApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<MovieBloc>(
-          create: (_) => MovieBloc(getMovies, getGenres)
+        BlocProvider<GenresBloc>(
+          create: (_) => GenresBloc(getGenres)
             ..add(LoadGenres(lang: 'en'))
+        ),
+        BlocProvider<MovieBloc>(
+          create: (_) => MovieBloc(getMovies)
             ..add(LoadMovies(lang: 'en-US', page: 1)),
         ),
         BlocProvider<LanguageBloc>(

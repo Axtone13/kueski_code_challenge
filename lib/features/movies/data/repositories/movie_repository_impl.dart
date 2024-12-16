@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:movies_app_challenge/core/error/failures.dart';
 import 'package:movies_app_challenge/features/movies/data/datasource/movies_remote_data_source.dart';
-import 'package:movies_app_challenge/features/movies/domain/entities/genre.dart';
 import 'package:movies_app_challenge/features/movies/domain/entities/movie.dart';
 import 'package:movies_app_challenge/features/movies/domain/repositories/movies_repository.dart';
 
@@ -15,17 +14,6 @@ class MovieRepositoryImpl implements MoviesRepository {
     try {
       final List<Movie> response =
           await moviesRemoteDataSource.getPopularMovies(lang, page);
-      return response;
-    } on DioException {
-      throw ServerFailure();
-    }
-  }
-
-  @override
-  Future<List<Genre>> getMovieGenres(String lang) async {
-    try {
-      final List<Genre> response =
-          await moviesRemoteDataSource.getMovieGenres(lang);
       return response;
     } on DioException {
       throw ServerFailure();
