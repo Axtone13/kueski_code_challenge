@@ -15,8 +15,18 @@ class MovieRepositoryImpl implements MoviesRepository {
       final List<Movie> response =
           await moviesRemoteDataSource.getPopularMovies(lang, page);
       return response;
-    } on DioException {
-      throw ServerFailure();
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionTimeout || e.type == DioExceptionType.receiveTimeout) {
+        throw ConnectionFailure('Connection timeout');
+      } else if (e.response?.statusCode == 404) {
+        throw NotFoundFailure('Resource not found');
+      } else if (e.response?.statusCode == 401) {
+        throw UnauthorizedFailure('Unauthorized');
+      } else {
+        throw ServerFailure('Server error: ${e.message}');
+      }
+    } catch (e) {
+      throw UnknownFailure('Unknown error: ${e.toString()}');
     }
   }
 }
