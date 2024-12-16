@@ -40,7 +40,7 @@ class GenreRepositoryImpl implements GenresRepository {
       } else if (e.response?.statusCode == 401) {
         throw UnauthorizedFailure('Unauthorized');
       } else {
-        throw ServerFailure('Server error: ${e.message}');
+        throw ServerFailure('Server error: ${e.message.toString()}');
       }
     } catch (e) {
       throw UnknownFailure('Unknown error: ${e.toString()}');
