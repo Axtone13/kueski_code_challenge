@@ -9,6 +9,12 @@ abstract class GenresRemoteDataSource {
 class GenresRemoteDataSourceImpl implements GenresRemoteDataSource {
   final Dio dio = Dio();
   
+  /**
+   * Get movie genres from the API
+   * 
+   * @param lang The language to get the genres
+   * @return List of genres
+   */
   @override
   Future<List<GenreModel>> getMovieGenres(String lang) async {
     final response = await dio.get('https://api.themoviedb.org/3/genre/movie/list',

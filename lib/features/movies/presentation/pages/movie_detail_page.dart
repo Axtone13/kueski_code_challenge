@@ -50,6 +50,7 @@ class MovieDetailPage extends StatelessWidget {
                     const SizedBox(height: 8),
                     BlocBuilder<GenresBloc, GenresState>(
                       builder: (context, state) {
+                        // Change the genre id's to genre's name in GenreListLoaded
                         if (state is GenreListLoaded) {
                           final genres = state.genres
                               .where(

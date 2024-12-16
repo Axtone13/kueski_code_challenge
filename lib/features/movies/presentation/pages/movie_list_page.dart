@@ -35,6 +35,7 @@ class _MovieListPageState extends State<MovieListPage> {
     super.dispose();
   }
 
+  // Infinite scrolling for the movie list
   void _onScroll() {
     if (_scrollController.position.pixels ==
         _scrollController.position.maxScrollExtent) {
@@ -53,6 +54,7 @@ class _MovieListPageState extends State<MovieListPage> {
       appBar: AppBar(
         title: Text(localizations.movieListTitle),
         actions: [
+          // Popup menu to change the language
           PopupMenuButton<Locale>(
             icon: const Icon(Icons.language),
             onSelected: (locale) {
@@ -61,7 +63,8 @@ class _MovieListPageState extends State<MovieListPage> {
               final localeCode = locale.languageCode == 'en' ? 'en' : 'es';
               _currentLanguageCode = languageCode;
               _currentLocaleCode = localeCode;
-              _currentPage = 1;
+              _currentPage = 1; // Reset the page number
+              // Load the genres and movies with the new language
               context.read<LanguageBloc>().add(ChangeLanguage(locale));
               context
                   .read<GenresBloc>()

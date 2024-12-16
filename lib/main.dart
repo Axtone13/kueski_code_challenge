@@ -15,10 +15,9 @@ import 'features/movies/presentation/pages/movie_list_page.dart';
 import 'features/movies/presentation/blocs/movies/movie_bloc.dart';
 import 'features/movies/data/repositories/movie_repository_impl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-// import 'package:dio/dio.dart';
 
 void main() {
-  // final dio = Dio();
+  // Dependency injection
   final moviesRemoteDataSource = MoviesRemoteDataSourceImpl();
   final movieRepository = MovieRepositoryImpl(moviesRemoteDataSource: moviesRemoteDataSource);
   final getMovies = GetPopularMoviesUseCase(repository: movieRepository);
@@ -41,18 +40,22 @@ class MoviesApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        // Bloc provider for load genres 
         BlocProvider<GenresBloc>(
           create: (_) => GenresBloc(getGenres)
             ..add(LoadGenres(lang: 'en'))
         ),
+        // Bloc provider for load movies
         BlocProvider<MovieBloc>(
           create: (_) => MovieBloc(getMovies)
             ..add(LoadMovies(lang: 'en-US', page: 1)),
         ),
+        // Bloc provider for change language
         BlocProvider<LanguageBloc>(
           create: (_) => LanguageBloc(),
         ),
       ],
+      // Bloc builder for change language and load app
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, state) {
           return MaterialApp(

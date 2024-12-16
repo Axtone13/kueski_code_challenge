@@ -9,6 +9,23 @@ class GenreRepositoryImpl implements GenresRepository {
 
   GenreRepositoryImpl({required this.genresRemoteDataSource});
 
+  /**
+   * Get movie genres from the API
+   * 
+   * @param lang The language to get the genres
+   * 
+   * @return List of genres
+   * 
+   * @throws ConnectionFailure When there is a connection error
+   * 
+   * @throws NotFoundFailure When the resource is not found
+   * 
+   * @throws UnauthorizedFailure When the request is unauthorized
+   * 
+   * @throws ServerFailure When there is a server error
+   * 
+   * @throws UnknownFailure When the error is unknown
+   */
   @override
   Future<List<Genre>> getMovieGenres(String lang) async {
     try {

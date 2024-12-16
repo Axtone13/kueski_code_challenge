@@ -9,6 +9,13 @@ abstract class MoviesRemoteDataSource {
 class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
   final Dio dio = Dio();
 
+  /**
+   * Get popular movies from the API
+   * 
+   * @param lang The language to get the movies
+   * @param page The page to get the movies
+   * @return List of movies
+   */
   @override
   Future<List<MovieModel>> getPopularMovies(String lang, int page) async {
     final response =

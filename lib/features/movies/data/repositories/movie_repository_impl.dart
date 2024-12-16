@@ -9,6 +9,23 @@ class MovieRepositoryImpl implements MoviesRepository {
 
   MovieRepositoryImpl({required this.moviesRemoteDataSource});
 
+  /* Get popular movies from the API
+   * 
+   * @param lang The language to get the movies
+   * @param page The page to get the movies
+   * 
+   * @return List of movies
+   * 
+   * @throws ConnectionFailure When there is a connection error
+   * 
+   * @throws NotFoundFailure When the resource is not found
+   * 
+   * @throws UnauthorizedFailure When the request is unauthorized
+   * 
+   * @throws ServerFailure When there is a server error
+   * 
+   * @throws UnknownFailure When the error is unknown
+   */
   @override
   Future<List<Movie>> getPopularMovies(String lang, int page) async {
     try {

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:movies_app_challenge/features/movies/domain/entities/movie.dart';
 import 'package:movies_app_challenge/features/movies/presentation/pages/movie_detail_page.dart';
 
+/* The MovieListItem widget is a ListTile that displays the movie poster and title.
+When the user taps on the ListTile, the MovieDetailPage is displayed. */
 class MovieListItem extends StatelessWidget {
   final Movie movie;
 

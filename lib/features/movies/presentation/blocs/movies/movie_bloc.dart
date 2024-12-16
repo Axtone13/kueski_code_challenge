@@ -8,7 +8,10 @@ import 'movie_state.dart';
 
 class MovieBloc extends Bloc<MovieEvent, MovieState> {
   final GetPopularMoviesUseCase getMovies;
-
+  /* The MovieBloc will emit the MovieLoading state when the LoadMovies event 
+  is dispatched.
+  If the use case call is successful, the MovieListLoaded state will be emitted.
+  If an error occurs, the MovieError state will be emitted. */ 
   MovieBloc(this.getMovies) : super(MovieInitial()) {
     on<LoadMovies>((event, emit) async {
       if (state is MovieLoading) return;
